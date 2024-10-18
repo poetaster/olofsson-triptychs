@@ -171,10 +171,26 @@ a.stop;
 a.start;
 
 
+//--tweet0038 funky boing rythm pingpong play with ohm 36
+//play{PingPong.ar(LocalBuf(3e4,2).clear,Ringz.ar(CuspN.ar*Impulse.kr([9,8]/12)/9,LFPar.kr(1/[3,2]).range(51,[99,17])*9),0.5)}//#SuperCollider
+(
+Ndef(\y).fadeTime = 3;
+Ndef(\y).play;
+b = Task({
+    1.do({ arg i;
+		Ndef(\y, {
+			PingPong.ar(LocalBuf(3e4,2).clear,Ringz.ar(CuspN.ar*Impulse.kr([9,8]/12)/9,LFPar.kr(1/[3,2]).range(51,[99,17])*9),0.5) });
+  });
+});
+b.start;
+)
+b.stop;
+b.start;
+
 //--tweet0032 drone with ticks WATCH volume
 //{Splay.ar({|i|l=LFTri.ar(1/6,i/1.5,2.5,3.5).round;SinOsc.ar(142.857*l,lag(l,i-3/6),1-poll(0.142857*l,10/6,"\t\t"))}!6)}.play//#SuperCollider
 (
-Ndef(\z).fadeTime = 3;
+Ndef(\z).fadeTime = 9;
 c.stop;
 c = Task({
     20.do({ arg s;
@@ -191,22 +207,103 @@ Ndef(\z).play;
 c.stop;
 c.start;
 
-//--tweet0028 another fibonacci tune (beeping)
-//play{MoogFF.ar(LFTri.ar(CombN.ar(Duty.ar(1/8,0,Dseq(Dshuf(List.fib(16)%8*99,8),inf)),4,4,16))/4,LFTri.kr(1/16,0,2e3,3e3))!2}//#SuperCollider
+
+//--tweet0036 ohm song.
+//play{Splay.ar({|i|SinOsc.ar(i+SinOsc.ar(0.01,a=pi/[2,4,8]@@i,0.1,1)*80+SinOsc.ar(i+1*1e-4+i),a,SinOsc.ar(i+1*1e-3,a)/4)}!9)}//#SuperCollider
+
 (
-Ndef(\y).fadeTime = 10;
-b.stop;
-b = Task({
+Ndef(\x).fadeTime = 3;
+a.stop;
+a = Task({
     20.do({ arg i;
-       Ndef(\y, {MoogFF.ar(LFTri.ar(
-			CombN.ar(
-				Duty.ar(1/8,0,Dseq(Dshuf(
-					List.fib(16)%8*99,8),inf)),4,4,16))/4,LFTri.kr(1/16,0,2e3,3e3))!2} );
-		9.wait;
-    });
+		Ndef(\x, {
+			Splay.ar( {|i| SinOsc.ar(i+SinOsc.ar(0.01,a=pi/[2,4,8]@@i,0.1,1)*80+SinOsc.ar(i+1*1e-4+i),a,SinOsc.ar(i+1*1e-3,a)/4) }!9) });
+  });
+});
+a.start;
+Ndef(\x).play;
+)
+a.stop;
+a.start;
+a.stop;
+
+//--tweet0050 clonky percussion exploration. play with 51
+//play{a=Saw;b=(2..12);c=0.015;GVerb.ar(Splay.ar(Klank.ar(`[b*50+b,c,c],Hasher.ar(a.ar(b/4pi,a.ar(c)*b+b).ceil)))/9,5.rand+1)}//#SuperCollider
+
+(
+Ndef(\y).fadeTime = 3;
+b.stop;
+b= Task({
+    20.do({ arg i;
+		Ndef(\y, {
+			a=Saw;b=(2..12);c=0.015;GVerb.ar(Splay.ar(Klank.ar(`[b*50+b,c,c],Hasher.ar(a.ar(b/4pi,a.ar(c)*b+b).ceil)))/9,5.rand+1) });
+  });
 });
 b.start;
 Ndef(\y).play;
 )
 b.stop;
 b.start;
+
+
+//--tweet0051 mix with 50 above
+//play{a=Saw;GVerb.ar(Splay.ar(BBandPass.ar(a.ar("sunday".ascii),a.ar(9/"slow".ascii)*400+500,a.ar(7/"coding".ascii)+1.1)/5))}//#SuperCollider
+
+(
+Ndef(\z).fadeTime = 9;
+c.stop;
+
+c = Task({
+    1.do({ arg i;
+		Ndef(\z, {
+			a=Saw; GVerb.ar(
+				Splay.ar(BBandPass.ar(a.ar("sunday".ascii),a.ar(9/"slow".ascii)*400+500,a.ar(7/"coding".ascii)+1.1)/5))});
+  });
+});
+c.start;
+Ndef(\z).play;
+)
+c.stop;
+c.start;
+
+//--tweet0030 horns on VarSaws through verb.
+//play{a=LFPar;GVerb.ar(VarSaw.ar(a.ar(1,0,5,a.ar([0.05,0.04],0,50,160).round(50)),0,a.ar(0.2,0,0.5,a.ar(3,0,0.2,0.5)))/8,80)}//#SuperCollider
+
+// you can just cut in one while the others are running on loop
+(
+Ndef(\x).fadeTime = 3;
+a.stop;
+a = Task({
+    5.do({ arg i;
+		Ndef(\x, {a=LFPar;
+			GVerb.ar(
+				VarSaw.ar(a.ar(1,0,5,a.ar([0.05,0.04],0,50,160).round(50)),0,a.ar(0.2,0,0.5,a.ar(3,0,0.2,0.5)))/8,80)} );
+    });
+});
+a.start;
+)
+a.stop;
+a.start;
+
+//--tweet0033 Noise rock combine with the VarSaws in 030!
+//play{f=LFPar.ar(1/14).round*20+80;Splay.ar(LFPar.ar({|i|[i+1*f,i*f+(i+1/3)]}!4)>BrownNoise.ar(Pulse.ar({|i|i+1}!4,0.35))/3)}//#SuperCollider
+
+(
+Ndef(\y).fadeTime = 3;
+Ndef(\y).play;
+b.stop;
+b = Task({
+    5.do({ arg i;
+		Ndef(\y, {
+			f=LFPar.ar(1/14).round*20+80;Splay.ar(
+				LFPar.ar({|i|[i+1*f,i*f+(i+1/3)]}!4)>BrownNoise.ar(Pulse.ar({|i|i+1}!4,0.35))/3) });
+  });
+});
+b.start;
+)
+b.stop;
+b.start;
+
+
+//--tweet0054 hardcore techno.!!!
+play{CombN.ar(SyncSaw.ar(Saw.ar([3,4],32,64),Saw.ar([4,3],99,Duty.kr(1,0,flop(Dseq(2!6++4++3,99)*(4**(0..4))))))/9,1,1/6,2)}//#SuperCollider
