@@ -27,57 +27,16 @@ Ndef(\y).play;
 
 
 
-//--tweet0028 another fibonacci tune (beeping)
-//play{MoogFF.ar(LFTri.ar(CombN.ar(Duty.ar(1/8,0,Dseq(Dshuf(List.fib(16)%8*99,8),inf)),4,4,16))/4,LFTri.kr(1/16,0,2e3,3e3))!2}//#SuperCollider
+//--tweet0078 combed noise,  note sequence.
+//play{a=GrayNoise.ar;b=(1..9);CombL.ar(a,1,b/Duty.ar(3,0,Dseq([0.5,1,2,3,5,4,3]*99,99)).lag3(1)).mean/2+Ringz.ar(a/99,b*99).mean!2}//#SuperCollider
+
 (
-Ndef(\y).fadeTime = 10;
-b.stop;
+Ndef(\y).fadeTime = 15;
 b = Task({
-    20.do({ arg i;
-       Ndef(\y, {MoogFF.ar(LFTri.ar(
-			CombN.ar(
-				Duty.ar(1/8,0,Dseq(Dshuf(
-					List.fib(16)%8*99,8),inf)),4,4,16))/4,LFTri.kr(1/16,0,2e3,3e3))!2} );
-		9.wait;
-    });
-});
-b.start;
-Ndef(\y).play;
-)
-b.stop;
-b.start;
-
-//--tweet0037 caliope on crack!
-//play{a=LFCub;n=8;Splay.ar(a.ar({|i|pow(i+1,a.kr(1/n,i/n,1/n,1))}!n*150,0,a.kr({|i|pow(i+1,a.kr(i+0.5/n,i/n))}!n).max(0))/4)}//#SuperCollider
-
-(
-Ndef(\x).fadeTime = 3;
-Ndef(\x).play;
-m = Task({
     1.do({ arg i;
-		Ndef(\x, {
-			a=LFCub;n=8;
-			Splay.ar(a.ar({|i|pow(i+1,a.kr(1/n,i/n,1/n,1))}!n*150,0,a.kr({|i|pow(i+1,a.kr(i+0.5/n,i/n))}!n).max(0))/4) });
-  });
-});
-m.start;
-)
-m.stop;
-m.start;
-
-
-//--tweet0030 horns on VarSaws through verb.
-//play{a=LFPar;GVerb.ar(VarSaw.ar(a.ar(1,0,5,a.ar([0.05,0.04],0,50,160).round(50)),0,a.ar(0.2,0,0.5,a.ar(3,0,0.2,0.5)))/8,80)}//#SuperCollider
-
-// you can just cut in one while the others are running on loop
-(
-Ndef(\y).fadeTime = 9;
-b.stop;
-b = Task({
-    5.do({ arg i;
-		Ndef(\y, {a=LFPar;
-			GVerb.ar(
-				VarSaw.ar(a.ar(1,0,5,a.ar([0.05,0.04],0,50,160).round(50)),0,a.ar(0.2,0,0.5,a.ar(3,0,0.2,0.5)))/8,80)} );
+        //Ndef(\y).map(\i, i);
+		Ndef(\y, { a=GrayNoise.ar;b=(1..9);CombL.ar(a,1,b/Duty.ar(3,0,Dseq([0.5,1,2,3,5,4,3]*99,99)).lag3(1)).mean/2+Ringz.ar(a/99,b*99).mean!2 } );
+        3.wait;
     });
 });
 b.start;
@@ -88,11 +47,11 @@ b.start;
 //play{f=LFPar.ar(1/14).round*20+80;Splay.ar(LFPar.ar({|i|[i+1*f,i*f+(i+1/3)]}!4)>BrownNoise.ar(Pulse.ar({|i|i+1}!4,0.35))/3)}//#SuperCollider
 
 (
-Ndef(\x).fadeTime = 3;
+Ndef(\x).fadeTime = 10;
 Ndef(\x).play;
 a.stop;
 a = Task({
-    5.do({ arg i;
+    1.do({ arg i;
 		Ndef(\x, {
 			f=LFPar.ar(1/14).round*20+80;Splay.ar(
 				LFPar.ar({|i|[i+1*f,i*f+(i+1/3)]}!4)>BrownNoise.ar(Pulse.ar({|i|i+1}!4,0.35))/3) });
@@ -104,7 +63,7 @@ a.start;
 //--tweet0054 hardcore techno.!!!
 play{CombN.ar(SyncSaw.ar(Saw.ar([3,4],32,64),Saw.ar([4,3],99,Duty.kr(1,0,flop(Dseq(2!6++4++3,99)*(4**(0..4))))))/9,1,1/6,2)}//#SuperCollider
 (
-Ndef(\y).fadeTime = 9;
+Ndef(\y).fadeTime = 10;
 b.stop;
 b = Task({
     1.do({ arg i;

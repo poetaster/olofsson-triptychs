@@ -67,7 +67,7 @@ Ndef(\y).play;
 //--tweet0003 metalic whips and blips
 //r{loop{x=play{t=SinOsc.ar(999.rand).abs;Formlet.ar(TDuty.ar(t,0,t),4e3.linrand,t,1-t)!2};wait(9.rand+1);x.release(39)}}.play//#SuperCollider
 (
-Ndef(\x).fadeTime = 9;
+Ndef(\x).fadeTime = 15;
 a.stop;
 a = Task({
     19.do({ arg i;
@@ -86,7 +86,7 @@ Ndef(\x).play;
 //r{loop{z=60.rand+1;x={y=LFTri.ar(z).abs/z;RLPF.ar(TDuty.ar(y,0,y),z*99+y,0.01,6+y)!2}.play(s,0,z);wait(z/3);x.release}}.play//#SuperCollider
 (
 b.stop;
-Ndef(\y).fadeTime = 9;
+Ndef(\y).fadeTime = 15;
 b = Task({
     20.do({ arg i;
         Ndef(\y).map(\s, i);
@@ -101,7 +101,7 @@ Ndef(\y).play;
 //r{loop{x={	MoogFF.ar(ClipNoise.ar*0.4,LFPar.kr({0.3.rand}!2,0,600,990))}.play(s,0,19);1.wait;x.release}}.play//#SuperCollider
 (
 a.stop;
-Ndef(\x).fadeTime = 5;
+Ndef(\x).fadeTime = 15;
 a = Task({
     20.do({ arg i;
         Ndef(\x).map(\s, i);
@@ -117,7 +117,7 @@ Ndef(\x).play;
 //r{loop{ z=20.rand+6;x={y=LFTri.ar(z).abs/9/z;RLPF.ar(TDuty.ar(y,0,y),z*600,0.06,9)!2}.play(s,0,z);wait(26-z);x.release}}.play//#SuperCollider
 // this one needs another def to start.
 (
-Ndef(\y).fadeTime = 9;
+Ndef(\y).fadeTime = 15;
 b.stop;
 b = Task({
     20.do({ arg i;
@@ -136,7 +136,7 @@ b.start;
 //--tweet0007 nice room plucked instrument with strums and nice growing druming.
 //r{loop{x={BPF.ar(Pluck.ar(Crackle.ar([1.9,1.8]),Impulse.ar(5.rand+1),0.05,0.05.linrand),1200.rand)}.play(s,0,9);wait(9);x.release(69)}}.play
 (
-Ndef(\x).fadeTime = 9;
+Ndef(\x).fadeTime = 15;
 a.stop;
 a = Task({
     20.do({ arg i;
@@ -150,41 +150,11 @@ a.start;
 Ndef(\x).play;
 )
 
-
-//--tweet0036 ohm song.
-//play{Splay.ar({|i|SinOsc.ar(i+SinOsc.ar(0.01,a=pi/[2,4,8]@@i,0.1,1)*80+SinOsc.ar(i+1*1e-4+i),a,SinOsc.ar(i+1*1e-3,a)/4)}!9)}//#SuperCollider
-
-(
-Ndef(\x).fadeTime = 3;
-a.stop;
-a = Task({
-    20.do({ arg i;
-		Ndef(\x, {
-			Splay.ar( {|i| SinOsc.ar(i+SinOsc.ar(0.01,a=pi/[2,4,8]@@i,0.1,1)*80+SinOsc.ar(i+1*1e-4+i),a,SinOsc.ar(i+1*1e-3,a)/4) }!9) });
-  });
-});
-a.start;
-Ndef(\x).play;
-)
-//--tweet0038 funky boing rythm pingpong play with ohm 36
-//play{PingPong.ar(LocalBuf(3e4,2).clear,Ringz.ar(CuspN.ar*Impulse.kr([9,8]/12)/9,LFPar.kr(1/[3,2]).range(51,[99,17])*9),0.5)}//#SuperCollider
-(
-Ndef(\y).fadeTime = 3;
-Ndef(\y).play;
-b = Task({
-    1.do({ arg i;
-		Ndef(\y, {
-			PingPong.ar(LocalBuf(3e4,2).clear,Ringz.ar(CuspN.ar*Impulse.kr([9,8]/12)/9,LFPar.kr(1/[3,2]).range(51,[99,17])*9),0.5) });
-  });
-});
-b.start;
-)
-
 //--tweet0050 clonky percussion exploration. play with 51
 //play{a=Saw;b=(2..12);c=0.015;GVerb.ar(Splay.ar(Klank.ar(`[b*50+b,c,c],Hasher.ar(a.ar(b/4pi,a.ar(c)*b+b).ceil)))/9,5.rand+1)}//#SuperCollider
 
 (
-Ndef(\y).fadeTime = 3;
+Ndef(\y).fadeTime = 15;
 b.stop;
 b= Task({
     20.do({ arg i;
@@ -198,7 +168,7 @@ Ndef(\y).play;
 //--tweet0051 mix with 50 above
 //play{a=Saw;GVerb.ar(Splay.ar(BBandPass.ar(a.ar("sunday".ascii),a.ar(9/"slow".ascii)*400+500,a.ar(7/"coding".ascii)+1.1)/5))}//#SuperCollider
 (
-Ndef(\x).fadeTime = 9;
+Ndef(\x).fadeTime = 15;
 a.stop;
 
 a = Task({
@@ -209,28 +179,5 @@ a = Task({
   });
 });
 a.start;
-Ndef(\z).play;
-)
-
-
-//--tweet0032 drone with ticks WATCH volume
-//{Splay.ar({|i|l=LFTri.ar(1/6,i/1.5,2.5,3.5).round;SinOsc.ar(142.857*l,lag(l,i-3/6),1-poll(0.142857*l,10/6,"\t\t"))}!6)}.play//#SuperCollider
-(
-Ndef(\x).fadeTime = 9;
-a.stop;
-a = Task({
-    20.do({ arg s;
-		Ndef(\x).map(\i, s);
-		Ndef(\x, { |i|
-			Splay.ar({|i|l=LFTri.ar(1/6,i/1.5,2.5,3.5).round;
-				SinOsc.ar(142.857*l,lag(l,i-3/6),1-poll(0.142857*l,10/6,"\t\t"))}!6)});
-		9.wait;
-  });
-});
-a.start;
 Ndef(\x).play;
 )
-
-
-//--tweet0054 hardcore techno.!!!
-play{CombN.ar(SyncSaw.ar(Saw.ar([3,4],32,64),Saw.ar([4,3],99,Duty.kr(1,0,flop(Dseq(2!6++4++3,99)*(4**(0..4))))))/9,1,1/6,2)}//#SuperCollider
