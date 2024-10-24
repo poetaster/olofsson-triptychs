@@ -25,28 +25,28 @@ Ndef(\y).play;
 
 )
 
-//--tweet0060 (play with 0064?)
-//a=LFSaw;play{FreeVerb.ar(CombN.ar(VarSaw.ar(a.ar([32,48],0,42*a.ar(1/[16,24]),8),0,a.ar([18,12],0,1/64,1/64)).sin/2,1,1,2))}//#SuperCollider
-
+//--tweet0077 sine drone + tick/tock rythm
+play{a=SinOsc;b=a.ar(a.ar(1/[5,6])+[798,912],a.ar(1/16)*19+99*a.ar([9,8]),a.ar(a.ar(6)*a.ar(0.009)));a.ar([201,301],b).tanh}//#SuperCollider
+// modified the bass sines deeper
 (
-Ndef(\x).fadeTime = 15;
-a.stop;
-a = Task({
+Ndef(\y).fadeTime = 15;
+b.stop;
+b = Task({
     1.do({ arg i;
-		Ndef(\x, {
-			a=LFSaw;FreeVerb.ar(
-				CombN.ar(VarSaw.ar(a.ar([32,48],0,42*a.ar(1/[16,24]),8),0,a.ar([18,12],0,1/64,1/64)).sin/2,1,1,2)) });
-  });
+        //Ndef(\y).map(\i, i);
+		Ndef(\y, { a=SinOsc;b=a.ar(a.ar(1/[5,6])+[798,912],a.ar(1/16)*19+99*a.ar([9,8]),a.ar(a.ar(6)*a.ar(0.009)));a.ar([101,201],b).tanh } );
+        3.wait;
+    });
 });
-a.start;
-Ndef(\x).play;
+b.start;
+Ndef(\y).play;
 )
 
 //--tweet0065 mix with 0064 wra, wra
 //format(a="play{SinOsc.ar(%/[%,%],LPF.ar(LFSaw.ar(Duty.ar(16/%,0,Dseq("+($%!96)+",inf)),%),%,%))}",*a.ascii).postln.interpret//#SuperCollider
 
 (
-Ndef(\x).fadeTime = 15;
+Ndef(\x).fadeTime = 25;
 b.stop;
 b = Task({
     1.do({ arg i;
@@ -59,20 +59,30 @@ b.start;
 Ndef(\x).play;
 )
 
-//--tweet0077 sine drone + tick/tock rythm
-//play{a=SinOsc;b=a.ar(a.ar(1/[5,6])+[798,912],a.ar(1/16)*19+99*a.ar([9,8]),a.ar(a.ar(6)*a.ar(0.009)));a.ar([201,301],b).tanh}//#SuperCollider
+
+//--tweet0060 (play with 0064?)
+//a=LFSaw;play{FreeVerb.ar(CombN.ar(VarSaw.ar(a.ar([32,48],0,42*a.ar(1/[16,24]),8),0,a.ar([18,12],0,1/64,1/64)).sin/2,1,1,2))}//#SuperCollider
 
 (
-Ndef(\y).fadeTime = 15;
-b.stop;
-b = Task({
+Ndef(\x).fadeTime = 25;
+a.stop;
+a = Task({
     1.do({ arg i;
-        //Ndef(\y).map(\i, i);
-		Ndef(\y, { a=SinOsc;b=a.ar(a.ar(1/[5,6])+[798,912],a.ar(1/16)*19+99*a.ar([9,8]),a.ar(a.ar(6)*a.ar(0.009)));a.ar([201,301],b).tanh } );
-        3.wait;
-    });
+		Ndef(\x, {
+			a=LFSaw;FreeVerb.ar(
+				CombN.ar(VarSaw.ar(a.ar([32,48],0,42*a.ar(1/[16,24]),8),0,a.ar([18,12],0,1/64,1/64)).sin/2,1,1,2)) });
+  });
 });
-b.start;
-Ndef(\y).play;
+a.start;
+Ndef(\x).play;
 )
 
+
+
+
+
+
+
+
+
+Ndef(\y, Ndef(\x));
