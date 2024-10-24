@@ -26,7 +26,6 @@ Ndef(\y).play;
 )
 
 
-
 //--tweet0078 combed noise,  note sequence.
 //play{a=GrayNoise.ar;b=(1..9);CombL.ar(a,1,b/Duty.ar(3,0,Dseq([0.5,1,2,3,5,4,3]*99,99)).lag3(1)).mean/2+Ringz.ar(a/99,b*99).mean!2}//#SuperCollider
 
@@ -48,7 +47,7 @@ b.start;
 
 (
 Ndef(\x).fadeTime = 10;
-Ndef(\x).play;
+
 a.stop;
 a = Task({
     1.do({ arg i;
@@ -58,6 +57,7 @@ a = Task({
   });
 });
 a.start;
+Ndef(\x).play;
 )
 
 //--tweet0054 hardcore techno.!!!

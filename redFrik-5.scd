@@ -38,22 +38,24 @@ b = Task({
   });
 });
 b.start;
+Ndef(\y).play;
 )
 
 //--tweet0030 horns on VarSaws through verb.
 //play{a=LFPar;GVerb.ar(VarSaw.ar(a.ar(1,0,5,a.ar([0.05,0.04],0,50,160).round(50)),0,a.ar(0.2,0,0.5,a.ar(3,0,0.2,0.5)))/8,80)}//#SuperCollider
 // you can just cut in one while the others are running on loop
 (
-Ndef(\y).fadeTime = 20;
-b.stop;
-b = Task({
+Ndef(\x).fadeTime = 20;
+a.stop;
+a = Task({
     1.do({ arg i;
-		Ndef(\y, {a=LFPar;
+		Ndef(\x, {a=LFPar;
 			GVerb.ar(
 				VarSaw.ar(a.ar(1,0,5,a.ar([0.05,0.04],0,50,160).round(50)),0,a.ar(0.2,0,0.5,a.ar(3,0,0.2,0.5)))/8,80)} );
     });
 });
-b.start;
+a.start;
+Ndef(\x).play;
 )
 
 //--tweet0069 sequence of noise gates with verb increasing room size Dnynamic! moves to white NOISE! And back
@@ -69,6 +71,7 @@ b = Task({
   });
 });
 b.start;
+Ndef(\y).play;
 )
 
 

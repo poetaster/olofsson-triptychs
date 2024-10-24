@@ -25,6 +25,17 @@ Ndef(\y).play;
 
 )
 
+// IN PROG
+//--tweet0023 nice drip dropping and bloops
+//play{Splay.ar({|i|f=i+5*99;RHPF.ar(Ringz.ar(Ball.ar(Saw.ar(i+1)>0,SinOsc.kr(0.1,0,1/5,0.3),0.05,0.02)/99,f,0.05),f,0.1)}!5)}//#SuperCollider
+
+(
+Ndef(\x).fadeTime = 5;
+Ndef(\x, {Splay.ar({|i|f=i+5*99;RHPF.ar(Ringz.ar(Ball.ar(Saw.ar(i+1)>0,SinOsc.kr(0.1,0,1/5,0.3),0.05,0.02)/99,f,0.05),f,0.1)}!5)} );
+)
+
+
+
 /*(
 Ndef(\x).fadeTime = 5;
 Ndef(\x, { |i=1 |
@@ -36,9 +47,9 @@ Ndef(\y, { |i=1 |
 
 (
 a.stop;
-Ndef(\x).fadeTime = 5;
+Ndef(\x).fadeTime = 15;
 a = Task({
-    19.do({ arg i;
+    1.do({ arg i;
         Ndef(\x).map(\i, i);
 		Ndef(\x,  { { Pan2.ar( SinOsc.ar(i+1, SinOsc.ar( (i%9).div(3)*100+(i%9)+500),0.03) * 4 ,1.0.rand2) } });
         [10,15,5].choose.wait;
@@ -52,9 +63,9 @@ Ndef(\x).play;
 //r{99.do{x={Pan2.ar(BPF.ar(Impulse.ar(18.linrand+0.5),9999.linrand,0.3.linrand,5),1.0.rand2)}.play;3.wait;x.release(9)}}.play//#SuperCollider
 (
 b.stop;
-Ndef(\y).fadeTime = 9;
+Ndef(\y).fadeTime = 15;
 b = Task({
-   29.do({ arg i;
+   3.do({ arg i;
         Ndef(\y).map(\i, i);
 		Ndef(\y, { x={ Pan2.ar(BPF.ar(Impulse.ar(18.linrand+0.5),9999.linrand,0.3.linrand,5)*3.0,1.0.rand2)}} );
 		3.wait;
@@ -113,6 +124,8 @@ a.start;
 Ndef(\x).play;
 )
 
+
+// THESE ALSO in 7
 //--tweet0004 whirring soundscape 4 & 5
 //r{loop{ z=20.rand+6;x={y=LFTri.ar(z).abs/9/z;RLPF.ar(TDuty.ar(y,0,y),z*600,0.06,9)!2}.play(s,0,z);wait(26-z);x.release}}.play//#SuperCollider
 // this one needs another def to start.
@@ -181,3 +194,5 @@ a = Task({
 a.start;
 Ndef(\x).play;
 )
+
+
