@@ -13,7 +13,7 @@ c.stop;
 )
 (
 //setup
-Ndef.clear;
+MIDIIn.connectAll;
 m = NdefGui.new;
 n = NdefGui.new;
 
@@ -22,6 +22,9 @@ n.object_(Ndef(\y));
 
 Ndef(\x).play;
 Ndef(\y).play;
+
+i = MIDIFunc.cc({arg ...args; Ndef(\y).vol_(args[0]/127.0)}, 0); // match cc 0
+j = MIDIFunc.cc({arg ...args; Ndef(\x).vol_(args[0]/127.0)}, 1); // match cc 1
 
 )
 
