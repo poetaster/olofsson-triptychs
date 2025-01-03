@@ -39,6 +39,22 @@ b.start;
 Ndef(\y).play;
 )
 
+//--tweet0092 formant singing
+play{Mix(Pan2.ar(Formlet.ar(Dust.ar(b=(1..8)),b*89,b/55,b/9),SinOsc.ar(b),LFSaw.ar(9.5-b,b/9,LFTri.ar(b/5)*4).max(0)).sin)}// #SuperCollider
+(
+Ndef(\x).fadeTime = 10;
+//a.stop;
+a = Task({
+    5.do({ arg i;
+		Ndef(\x, {
+			Mix(Pan2.ar(Formlet.ar(Dust.ar(b=(1..8)),b*89,b/55,b/9),SinOsc.ar(b),LFSaw.ar(9.5-b,b/9,LFTri.ar(b/5)*4).max(0)).sin) });
+  });
+});
+a.start;
+Ndef(\x).play;
+)
+
+
 //--tweet0089 cave drop music very nice. try 77 or 99
 play{GVerb.ar(Splay.ar(Ringz.ar(Blip.ar(a=[5,8,13,21,34,55,13],LFNoise0.ar(4/a)*144,LFNoise1.ar(4/a).max(0)),a*144,4/a))/6,144)}//#SuperCollider
 (
@@ -54,20 +70,6 @@ b.start;
 Ndef(\y).play;
 )
 
-//--tweet0092 formant singing
-play{Mix(Pan2.ar(Formlet.ar(Dust.ar(b=(1..8)),b*89,b/55,b/9),SinOsc.ar(b),LFSaw.ar(9.5-b,b/9,LFTri.ar(b/5)*4).max(0)).sin)}// #SuperCollider
-(
-Ndef(\x).fadeTime = 10;
-//a.stop;
-a = Task({
-    1.do({ arg i;
-		Ndef(\x, {
-			Mix(Pan2.ar(Formlet.ar(Dust.ar(b=(1..8)),b*89,b/55,b/9),SinOsc.ar(b),LFSaw.ar(9.5-b,b/9,LFTri.ar(b/5)*4).max(0)).sin) });
-  });
-});
-a.start;
-Ndef(\x).play;
-)
 
 
 

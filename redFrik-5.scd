@@ -58,6 +58,8 @@ a.start;
 Ndef(\x).play;
 )
 
+
+
 //--tweet0069 sequence of noise gates with verb increasing room size Dnynamic! moves to white NOISE! And back
 //play{a=LocalIn.ar(2);LocalOut.ar(a=Hasher.ar(a.round(LFPar.ar(4e-3).round(3e-3)/3+a)));FreeVerb2.ar(a[0],a[1],0.33,1,1,0.4)}//#SuperCollider
 
@@ -73,8 +75,6 @@ b = Task({
 b.start;
 Ndef(\y).play;
 )
-
-
 
 
 

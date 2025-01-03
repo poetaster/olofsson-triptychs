@@ -30,7 +30,7 @@ Ndef(\y).play;
 //--tweet0082 grr, grrr, grrrrr, whip!
 play{a=LFTri.ar(1/9)*0.07+0.0708;CombN.ar(Decay2.ar(Duty.ar(Dseq([1e-4,a/2],inf),0!2,Dseq([-1,0,1,0],inf)),a/9,a)/5,1,1,12)}//#SuperCollider
 (
-Ndef(\x).fadeTime = 15;
+Ndef(\x).fadeTime = 20;
 Ndef(\x).fadeTime = 5;
 Ndef(\x, { a=SinOsc;b=a.ar(1/3);Duty.ar(SampleDur.ir,0,Dseq([0,1],inf)).bitXor(a.ar(b>0*30+60,0,a.ar(4,0,a.ar([3,2]/9,b*3,9))))/9} );
 )
@@ -63,7 +63,7 @@ Ndef(\x).fadeTime = 15;
 a.stop;
 
 a = Task({
-    1.do({ arg i;
+    2.do({ arg i;
 		Ndef(\x, {
 			a=Saw; GVerb.ar(
 				Splay.ar(BBandPass.ar(a.ar("sunday".ascii),a.ar(9/"slow".ascii)*400+500,a.ar(7/"coding".ascii)+1.1)/5))});
@@ -81,7 +81,7 @@ Ndef(\x).play;
 Ndef(\y).fadeTime = 15;
 b.stop;
 b = Task({
-    1.do({ arg i;
+    4.do({ arg i;
         Ndef(\y).map(\s, i);
 		Ndef(\y, { z=20.rand+6;x={ y=LFTri.ar(z).abs/9/z;RLPF.ar(TDuty.ar(y,0,y),z*600,0.06,9)!2}} );
         Ndef(\y).fadeTime = 26-20.rand+6;
@@ -97,7 +97,7 @@ b.start;
 //--tweet0007 nice room plucked instrument with strums and nice growing druming.
 //r{loop{x={BPF.ar(Pluck.ar(Crackle.ar([1.9,1.8]),Impulse.ar(5.rand+1),0.05,0.05.linrand),1200.rand)}.play(s,0,9);wait(9);x.release(69)}}.play
 (
-Ndef(\x).fadeTime = 15;
+Ndef(\x).fadeTime = 25;
 a.stop;
 a = Task({
     20.do({ arg i;
