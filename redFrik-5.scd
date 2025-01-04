@@ -67,7 +67,7 @@ Ndef(\x).play;
 //play{a=LocalIn.ar(2);LocalOut.ar(a=Hasher.ar(a.round(LFPar.ar(4e-3).round(3e-3)/3+a)));FreeVerb2.ar(a[0],a[1],0.33,1,1,0.4)}//#SuperCollider
 
 (
-Ndef(\y).fadeTime = 20;
+Ndef(\y).fadeTime = 10;
 b.stop;
 b = Task({
     1.do({ arg i;
