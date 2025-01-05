@@ -10,31 +10,40 @@ Ndef.clear;
 a.stop;
 b.stop;
 c.stop;
-i.free; // cleanup
+s.free;
+t.free;
+u.free;
+v.free;
+w.free;
 )
 
 (
-//setup
+s.boot; // start the server
 MIDIIn.connectAll;
+r = Recorder(s);
 
+//setup
 Ndef.clear;
 m = NdefGui.new;
 n = NdefGui.new;
 
 m.object_(Ndef(\x));
 n.object_(Ndef(\y));
+// volume control via midi
+i = MIDIFunc.cc( {arg ...args; Ndef(\y).vol_(args[0]/127.0)}, 0); // match cc 0
+j = MIDIFunc.cc( {arg ...args; Ndef(\x).vol_(args[0]/127.0)}, 1); // match cc 1
 
+// record via midi
+s = MIDIFunc.cc({arg ...args;
+	if (args[0] > 0,
+		{ r.record(path:"~/Audio/supercollider/olofsson-triptychs/red-9.aiff"); },
+		{ r.stopRecording } )} , 41); // match cc 41 is record onkontrol2
 
-//Ndef(\y).set(\vol, i.kr(0,0 [0,0.7]));
-//Ndef(\x).set(\vol, i.kr(0,1 [0,0.7]));
-
-
-Ndef(\x).play;
-Ndef(\y).play;
-
-i = MIDIFunc.cc({arg ...args; Ndef(\y).vol_(args[0]/127.0)}, 0); // match cc 0
-j = MIDIFunc.cc({arg ...args; Ndef(\x).vol_(args[0]/127.0)}, 1); // match cc 1
-
+// pause resume via midi
+t = MIDIFunc.cc({arg ...args; if (args[0] > 0, { Ndef(\y).resume}, {Ndef(\y).pause })} , 48); // match cc 48
+u = MIDIFunc.cc({arg ...args; if (args[0] > 0, { Ndef(\x).resume}, {Ndef(\x).pause })} , 49);
+v = MIDIFunc.cc({arg ...args; if (args[0] > 0, { Ndef(\y).play}, {Ndef(\y).stop })} , 64);
+w = MIDIFunc.cc({arg ...args; if (args[0] > 0, { Ndef(\x).play}, {Ndef(\x).stop })} , 65);
 )
 
 
@@ -48,6 +57,7 @@ Ndef(\y, {FreeVerb.ar(Splay.ar( BBandPass.ar(Blip.ar( b=(1..8)+1, LFTri.ar(1/b)*
 
 //--tweet0089 cave drop music very nice. try 77 or 99
 //play{GVerb.ar(Splay.ar(Ringz.ar(Blip.ar(a=[5,8,13,21,34,55,13],LFNoise0.ar(4/a)*144,LFNoise1.ar(4/a).max(0)),a*144,4/a))/6,144)}//#SuperCollider(
+// ONLY to 1/2
 (
 Ndef(\x).fadeTime = 15;
 Ndef(\x, {GVerb.ar(Splay.ar(Ringz.ar(Blip.ar(a=[5,8,13,21,34,55,13],LFNoise0.ar(4/a)*144,LFNoise1.ar(4/a).max(0)),a*144,4/a))/6,144)});

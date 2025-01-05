@@ -10,9 +10,18 @@ Ndef.clear;
 a.stop;
 b.stop;
 c.stop;
+s.free;
+t.free;
+u.free;
+v.free;
+w.free;
 )
+
 (
+s.boot; // start the server
 MIDIIn.connectAll;
+r = Recorder(s);
+
 //setup
 Ndef.clear;
 m = NdefGui.new;
@@ -20,12 +29,21 @@ n = NdefGui.new;
 
 m.object_(Ndef(\x));
 n.object_(Ndef(\y));
-i = MIDIFunc.cc({arg ...args; Ndef(\y).vol_(args[0]/127.0)}, 0); // match cc 0
-j = MIDIFunc.cc({arg ...args; Ndef(\x).vol_(args[0]/127.0)}, 1); // match cc 1
+// volume control via midi
+i = MIDIFunc.cc( {arg ...args; Ndef(\y).vol_(args[0]/127.0)}, 0); // match cc 0
+j = MIDIFunc.cc( {arg ...args; Ndef(\x).vol_(args[0]/127.0)}, 1); // match cc 1
 
-Ndef(\x).play;
-Ndef(\y).play;
+// record via midi
+s = MIDIFunc.cc({arg ...args;
+	if (args[0] > 0,
+		{ r.record(path:"~/Audio/supercollider/olofsson-triptychs/red-2.aiff"); },
+		{ r.stopRecording } )} , 41); // match cc 41 is record onkontrol2
 
+// pause resume via midi
+t = MIDIFunc.cc({arg ...args; if (args[0] > 0, { Ndef(\y).resume}, {Ndef(\y).pause })} , 48); // match cc 48
+u = MIDIFunc.cc({arg ...args; if (args[0] > 0, { Ndef(\x).resume}, {Ndef(\x).pause })} , 49);
+v = MIDIFunc.cc({arg ...args; if (args[0] > 0, { Ndef(\y).play}, {Ndef(\y).stop })} , 64);
+w = MIDIFunc.cc({arg ...args; if (args[0] > 0, { Ndef(\x).play}, {Ndef(\x).stop })} , 65);
 )
 
 
