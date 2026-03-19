@@ -21,6 +21,7 @@ w.free;
 s.boot; // start the server
 MIDIIn.connectAll;
 r = Recorder(s);
+r.prepareForRecord(path:"~/Audio/supercollider/olofsson-triptychs/red-9.aiff");
 
 //setup
 Ndef.clear;

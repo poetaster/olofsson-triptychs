@@ -18,7 +18,8 @@ w.free;
 )
 
 (
-s.boot; // start the server
+//s.boot; // start the server
+Server.default.options.memSize = 819200;
 MIDIIn.connectAll;
 r = Recorder(s);
 
@@ -51,14 +52,15 @@ w = MIDIFunc.cc({arg ...args; if (args[0] > 0, { Ndef(\x).play}, {Ndef(\x).stop 
 //play{a=GrayNoise.ar;b=(1..9);CombL.ar(a,1,b/Duty.ar(3,0,Dseq([0.5,1,2,3,5,4,3]*99,99)).lag3(1)).mean/2+Ringz.ar(a/99,b*99).mean!2}//#SuperCollider
 
 (
-Ndef(\y).fadeTime = 15;
+Ndef(\x).fadeTime = 25;
 b = Task({
-    1.do({ arg i;
+    5.do({ arg i;
         //Ndef(\y).map(\i, i);
-		Ndef(\y, { a=GrayNoise.ar;b=(1..9);CombL.ar(a,1,b/Duty.ar(3,0,Dseq([0.5,1,2,3,5,4,3]*99,99)).lag3(1)).mean/2+Ringz.ar(a/99,b*99).mean!2 } );
+		Ndef(\x, { a=GrayNoise.ar;b=(1..9);CombL.ar(a,1,b/Duty.ar(3,0,Dseq([0.5,1,2,3,5,4,3]*99,99)).lag3(1)).mean/2+Ringz.ar(a/99,b*99).mean!2 } );
         3.wait;
     });
 });
+Ndef(\x).play;
 b.start;
 )
 
@@ -67,28 +69,28 @@ b.start;
 //play{f=LFPar.ar(1/14).round*20+80;Splay.ar(LFPar.ar({|i|[i+1*f,i*f+(i+1/3)]}!4)>BrownNoise.ar(Pulse.ar({|i|i+1}!4,0.35))/3)}//#SuperCollider
 
 (
-Ndef(\x).fadeTime = 10;
+Ndef(\y).fadeTime = 10;
 
 a.stop;
 a = Task({
-    1.do({ arg i;
-		Ndef(\x, {
+    5.do({ arg i;
+		Ndef(\y, {
 			f=LFPar.ar(1/14).round*20+80;Splay.ar(
 				LFPar.ar({|i|[i+1*f,i*f+(i+1/3)]}!4)>BrownNoise.ar(Pulse.ar({|i|i+1}!4,0.35))/3) });
   });
 });
 a.start;
-Ndef(\x).play;
+Ndef(\y).play;
 )
 
 //--tweet0054 hardcore techno.!!!
 play{CombN.ar(SyncSaw.ar(Saw.ar([3,4],32,64),Saw.ar([4,3],99,Duty.kr(1,0,flop(Dseq(2!6++4++3,99)*(4**(0..4))))))/9,1,1/6,2)}//#SuperCollider
 (
-Ndef(\y).fadeTime = 10;
+Ndef(\x).fadeTime = 10;
 b.stop;
 b = Task({
     1.do({ arg i;
-		Ndef(\y, {CombN.ar(SyncSaw.ar(Saw.ar([3,4],32,64),Saw.ar([4,3],99,Duty.kr(1,0,flop(Dseq(2!6++4++3,99)*(4**(0..4))))))/9,1,1/6,2)} );
+		Ndef(\x, {CombN.ar(SyncSaw.ar(Saw.ar([3,4],32,64),Saw.ar([4,3],99,Duty.kr(1,0,flop(Dseq(2!6++4++3,99)*(4**(0..4))))))/9,1,1/6,2)} );
     });
 });
 b.start;

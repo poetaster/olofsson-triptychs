@@ -18,7 +18,7 @@ w.free;
 )
 
 (
-s.boot; // start the server
+//s.boot; // start the server
 MIDIIn.connectAll;
 r = Recorder(s);
 
@@ -70,7 +70,7 @@ Ndef(\y, { |i=1 |
 a.stop;
 Ndef(\x).fadeTime = 15;
 a = Task({
-    3.do({ arg i;
+    10.do({ arg i;
         Ndef(\x).map(\i, i);
 		Ndef(\x,  { { Pan2.ar( SinOsc.ar(i+1, SinOsc.ar( (i%9).div(3)*100+(i%9)+500),0.03) * 4 ,1.0.rand2) } });
         [10,15,5].choose.wait;
@@ -86,7 +86,7 @@ Ndef(\x).play;
 b.stop;
 Ndef(\y).fadeTime = 15;
 b = Task({
-   3.do({ arg i;
+   10.do({ arg i;
         Ndef(\y).map(\i, i);
 		Ndef(\y, { x={ Pan2.ar(BPF.ar(Impulse.ar(18.linrand+0.5),9999.linrand,0.3.linrand,5)*3.0,1.0.rand2)}} );
 		3.wait;

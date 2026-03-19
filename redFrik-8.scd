@@ -21,6 +21,7 @@ w.free;
 s.boot; // start the server
 MIDIIn.connectAll;
 r = Recorder(s);
+r.prepareForRecord(path:"~/Audio/supercollider/olofsson-triptychs/red-8.aiff");
 
 //setup
 Ndef.clear;
@@ -67,7 +68,7 @@ Ndef(\y).play;
 //play{a=Saw;b=(2..12);c=0.015;GVerb.ar(Splay.ar(Klank.ar(`[b*50+b,c,c],Hasher.ar(a.ar(b/4pi,a.ar(c)*b+b).ceil)))/9,5.rand+1)}//#SuperCollider
 
 (
-Ndef(\x).fadeTime = 15;
+Ndef(\x).fadeTime = 30;
 b.stop;
 b= Task({
     20.do({ arg i;
@@ -81,7 +82,7 @@ Ndef(\x).play;
 //--tweet0051 mix with 50 above
 //play{a=Saw;GVerb.ar(Splay.ar(BBandPass.ar(a.ar("sunday".ascii),a.ar(9/"slow".ascii)*400+500,a.ar(7/"coding".ascii)+1.1)/5))}//#SuperCollider
 (
-Ndef(\y).fadeTime = 15;
+Ndef(\y).fadeTime = 30;
 a.stop;
 a = Task({
     2.do({ arg i;

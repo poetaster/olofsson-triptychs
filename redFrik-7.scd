@@ -21,6 +21,7 @@ w.free;
 s.boot; // start the server
 MIDIIn.connectAll;
 r = Recorder(s);
+r.prepareForRecord(path:"~/Audio/supercollider/olofsson-triptychs/red-7.aiff");
 
 //setup
 Ndef.clear;
@@ -62,7 +63,7 @@ Ndef(\x).play
 
 // NICE with the one before 18!
 (
-Ndef(\x).fadeTime = 10;
+Ndef(\x).fadeTime = 20;
 Ndef(\x, { b=LocalBuf(1e4,2).clear;i=Sweep.ar(BufRd.ar(2,b,Saw.ar(1,2e3,5e3)),5e5);BufWr.ar(Saw.ar([8,50]),b,i);BufRd.ar(2,b,i)/3} );
 Ndef(\y).fadeTime = 10;
 Ndef(\y, { a=LFPulse;b=(1..4);Mix(a.ar(a.ar(a.ar(a.ar(b/32)+1/8)+1*b)+(Mix(a.ar(b/64))+a.ar(4/b)*(a.ar(a.ar(b/8))*2+b))*100))/8!2} );

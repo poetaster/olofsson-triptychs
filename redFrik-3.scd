@@ -18,9 +18,10 @@ w.free;
 )
 
 (
-s.boot; // start the server
+//s.boot; // start the server
 MIDIIn.connectAll;
 r = Recorder(s);
+r.prepareForRecord(path:"~/Audio/supercollider/olofsson-triptychs/red-3.aiff");
 
 //setup
 Ndef.clear;
@@ -36,7 +37,7 @@ j = MIDIFunc.cc( {arg ...args; Ndef(\x).vol_(args[0]/127.0)}, 1); // match cc 1
 // record via midi
 s = MIDIFunc.cc({arg ...args;
 	if (args[0] > 0,
-		{ r.record(path:"~/Audio/supercollider/olofsson-triptychs/red-3.aiff"); },
+		{ r.record(numChannels:2); },
 		{ r.stopRecording } )} , 41); // match cc 41 is record onkontrol2
 
 // pause resume via midi
@@ -56,7 +57,7 @@ play{BLowPass4.ar(Splay.ar(VarSaw.ar(200*Duty.kr(1/(1..5),0,Dseq(flat({|x|{|y|y+
 Ndef(\y).fadeTime = 10;
 b.stop;
 b = Task({
-    1.do({ arg i;
+    4.do({ arg i;
 		Ndef(\y, {
 			Splay.ar( {|i| SinOsc.ar(i+SinOsc.ar(0.01,a=pi/[2,4,8]@@i,0.1,1)*80+SinOsc.ar(i+1*1e-4+i),a,SinOsc.ar(i+1*1e-3,a)/4) }!9) });
   });
