@@ -63,9 +63,9 @@ Ndef(\x).play
 
 // NICE with the one before 18!
 (
-Ndef(\x).fadeTime = 20;
+Ndef(\x).fadeTime = 30;
 Ndef(\x, { b=LocalBuf(1e4,2).clear;i=Sweep.ar(BufRd.ar(2,b,Saw.ar(1,2e3,5e3)),5e5);BufWr.ar(Saw.ar([8,50]),b,i);BufRd.ar(2,b,i)/3} );
-Ndef(\y).fadeTime = 10;
+Ndef(\y).fadeTime = 30;
 Ndef(\y, { a=LFPulse;b=(1..4);Mix(a.ar(a.ar(a.ar(a.ar(b/32)+1/8)+1*b)+(Mix(a.ar(b/64))+a.ar(4/b)*(a.ar(a.ar(b/8))*2+b))*100))/8!2} );
 Ndef(\x).play;
 Ndef(\y).play;
@@ -88,7 +88,7 @@ Ndef(\y).play;
 //--tweet0007 nice room plucked instrument with strums and nice growing druming.
 //r{loop{x={BPF.ar(Pluck.ar(Crackle.ar([1.9,1.8]),Impulse.ar(5.rand+1),0.05,0.05.linrand),1200.rand)}.play(s,0,9);wait(9);x.release(69)}}.play
 (
-Ndef(\x).fadeTime = 15;
+Ndef(\x).fadeTime = 30;
 a.stop;
 a = Task({
     6.do({ arg i;
@@ -106,7 +106,7 @@ Ndef(\x).play;
 //r{loop{ z=20.rand+6;x={y=LFTri.ar(z).abs/9/z;RLPF.ar(TDuty.ar(y,0,y),z*600,0.06,9)!2}.play(s,0,z);wait(26-z);x.release}}.play//#SuperCollider
 // this one needs another def to start.
 (
-Ndef(\y).fadeTime = 15;
+Ndef(\y).fadeTime = 30;
 b.stop;
 b = Task({
     20.do({ arg i;

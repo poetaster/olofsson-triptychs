@@ -19,9 +19,15 @@ w.free;
 
 (
 //s.boot; // start the server
+//p = ServerOptions.new;
+//p.memsize = 819200;
 Server.default.options.memSize = 819200;
+Server.default.reboot;
+
 MIDIIn.connectAll;
 r = Recorder(s);
+r.prepareForRecord(path:"~/Audio/supercollider/olofsson-triptychs/red-2.aiff");
+
 
 //setup
 Ndef.clear;
